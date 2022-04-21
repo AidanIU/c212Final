@@ -6,9 +6,22 @@ public class Item{
     private int quantity;
     private int aisleNum;
 
-    public Item(String name, double price, int quality int aisleNum){}
-    public String getName(){}
-    public double getPrice(){}
-    public int getQuantity(){}
-    public int getAisle(){}
+    public Item(String name, double price, int quantity, int aisleNum){
+        this.name = name;
+        this.price = price;
+        this.quantity = quantity;
+        this.aisleNum = aisleNum;
+    }
+    public String getName(){
+        return name;
+    }
+    public double getPrice(){
+        return price;
+    }
+    public int getQuantity(){
+        return quantity;
+    }
+    public int getAisle(){
+        return aisleNum;
+    }
 }
