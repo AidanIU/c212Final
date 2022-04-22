@@ -13,6 +13,7 @@ public class StoreMap extends JComponent {
         // Drawing the map
         // No need to touch the code in this section of the method
         // Set StoreMapDisplay.WIDTH to 700 and StoreMapDisplay.HEIGHT to 500 for this to display properly!
+
         int canvasWidth = StoreMapDisplay.WIDTH - 10;
         int canvasHeight = StoreMapDisplay.HEIGHT - 37;
         int aisleWidth = 200;
@@ -59,6 +60,16 @@ public class StoreMap extends JComponent {
 
         // TODO: draw the box appropriately around the aisle. You'll need to define these boundaries yourself for each one!
         g.setColor(Color.GREEN);
+        int i = aisleNum;
+        if(i <= 3){
+            g.drawRect(30, 30 + 60 * i, aisleWidth, aisleHeight);
+        } else{
+            g.drawRect(450, 30 + 60 * i, aisleWidth, aisleHeight);
+        }
+
+
+
+
 
     }
 
