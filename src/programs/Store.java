@@ -1,6 +1,6 @@
 package programs;
 
-public class Store implaments IStore{
+public class Store implements IStore{
     void takeAction(){
         //ADD '<itemName>' <itemCost> <itemQuantity>
         //COST '<itemName>'
