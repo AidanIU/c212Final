@@ -35,7 +35,7 @@ public class FileUtils {
         return list;
     }
 
-    public List<Staff> readStaffFromFile() throws IOException {
+    public static List<Staff> readStaffFromFile() throws IOException {
         //Staff file will be in format firstname lastname age role
         Scanner s = new Scanner(staffFile);
         List<Staff> list = new ArrayList<Staff>();

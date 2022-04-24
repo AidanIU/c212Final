@@ -2,12 +2,16 @@ package programs;
 
 import models.Item;
 import models.Staff;
+import utils.FileUtils;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
-public class Store implements IStore{
 
-    public void takeAction(){
+public abstract class Store implements IStore{
+
+    public void takeAction() {
         //ADD '<itemName>' <itemCost> <itemQuantity>
         //COST '<itemName>'
         //EXIT
@@ -20,7 +24,25 @@ public class Store implements IStore{
         //SELL '<itemName>' <quantity>
         //QUANTITY '<itemName>'
 
+        List<String> inputList = new ArrayList<String>();
+        List<Staff> staffList = new ArrayList<Staff>();
+
+        try {
+            inputList = FileUtils.readCommandsFromFile();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+
+        try {
+            staffList = FileUtils.readStaffFromFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println(inputList);
+
+
+    }
 
     public Store(){
 
