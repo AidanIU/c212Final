@@ -39,8 +39,6 @@ public abstract class Store implements IStore{
             e.printStackTrace();
         }
 
-        System.out.println(inputList);
-
 
     }
 
