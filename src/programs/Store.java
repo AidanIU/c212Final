@@ -1,7 +1,13 @@
 package programs;
 
+import models.Item;
+import models.Staff;
+
+import java.util.List;
+
 public class Store implements IStore{
-    void takeAction(){
+
+    public void takeAction(){
         //ADD '<itemName>' <itemCost> <itemQuantity>
         //COST '<itemName>'
         //EXIT
