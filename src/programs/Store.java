@@ -68,7 +68,27 @@ public abstract class Store implements IStore{
                 String outputLine = itemName + " has been addde to inventory";
                 FileUtils.writeLineToOutputFile(outputLine);
             }
-            else if (command.substring(0,2) == "SAW"){}
+            else if (command.substring(0,2) == "SAW"){
+                ArrayList<Item> bigPlanks = new ArrayList<Item>();
+                for (Item item: inventoryList) {
+                    String name = item.getName();
+                    if (name.subbstring(0,5).equals("Plank")){
+                        inventoryList.remove(item);
+                        String[] arrOfStr = name.split(" ");
+                        String[] arrOfStr2 = arrOfStr[0].split("-");
+                        int length = Integer.parseInt(arrOfStr2[1]);
+                        int quantity = arrOfStr[2];
+                        int aisle = arrOfStr[3];
+                        List<Integer> newPlanks = SawPrimePlanks.getPlankLengths(length);
+                        int newLength = newPlanks[0];
+                        int totalPlanks = newPlanks.size() * quantity;
+                        int newPrice = newLength * newLength;
+                        String newName = "Plank-" + Integer.toString(newLength);
+                        inventoryList.add(new Item(newName, newPrice, totalPlanks, aisle));
+                    }
+                }
+                FileUtils.writeLineToOutputFile("Planks Sawed");
+            }
             else if (command.substring(0,3) == "COST"){
                 int startName = command.indexOf("'");
                 int endName = command.lastIndexOf("'");
