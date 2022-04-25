@@ -60,11 +60,9 @@ public abstract class Store implements IStore{
                 String[] arrOfStr = restOfString.split(" ");
                 int cost = Integer.parseInt(arrOfStr[0]);
                 int quantity = Integer.parseInt(arrOfStr[1]);
-                //Document only gives cost and quantity as part of this command, no aisle number
-                Random rand;
-                int number = rand.nextInt(21) + 1
+                int aisle = Integer.parseInt(arrOfStr[2]);
                 //
-                inventoryList.add(new Item(itemName, cost, quantity, number));
+                inventoryList.add(new Item(itemName, cost, quantity, aisle));
                 String outputLine = itemName + " has been addde to inventory";
                 FileUtils.writeLineToOutputFile(outputLine);
             }
