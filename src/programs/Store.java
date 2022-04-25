@@ -69,6 +69,18 @@ public abstract class Store implements IStore{
             }
             else if (command.substring(0,2) == "SAW"){}
             else if (command.substring(0,3) == "COST"){
+                int startName = command.indexOf("'");
+                int endName = command.lastIndexOf("'");
+                String itemName = command.substring(startName + 1 , endName - 1);
+                int price = 0;
+
+                for (Item itemFromList: inventoryList) {
+                    if(itemFromList.getName() == itemName){
+                        price = itemFromList.getPrice();
+                    }
+                }
+                String printingPrice = valueOf(price);
+                FileUtils.writeLineToOutputFile(itemName + ": $" + printingPrice);
             }
             else if (command.substring(0,3) == "EXIT"){}
             else if (command.substring(0,3) == "FIND"){
