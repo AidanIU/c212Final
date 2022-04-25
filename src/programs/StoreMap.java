@@ -60,17 +60,18 @@ public class StoreMap extends JComponent {
 
         // TODO: draw the box appropriately around the aisle. You'll need to define these boundaries yourself for each one!
         g.setColor(Color.GREEN);
-        int i = aisleNum;
-        if(i <= 3){
+        int i = aisleNum-1;
+        if(i <= 8){
             g.drawRect(30, 30 + 60 * i, aisleWidth, aisleHeight);
+            g.drawRect(30-1, (30 + 60 * i)-1, aisleWidth+2, aisleHeight+2);
+            g.drawRect(30-2, (30 + 60 * i)-2, aisleWidth+4, aisleHeight+4);
         } else{
-            g.drawRect(450, 30 + 60 * i, aisleWidth, aisleHeight);
+            g.drawRect(450, (30 + 60 * (i-4)) , aisleWidth, aisleHeight);
+            g.drawRect(450-1, (30 + 60 * (i-4))-1 , aisleWidth+2, aisleHeight+2);
+            g.drawRect(450-2, (30 + 60 * (i-4))-2 , aisleWidth+4, aisleHeight+4);
         }
 
-
-
-
-
     }
-
 }
+
+
