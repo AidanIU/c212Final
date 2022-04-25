@@ -3,6 +3,7 @@ package programs;
 import models.Item;
 import models.Staff;
 import utils.FileUtils;
+import java.util.Random;
 
 import java.io.File;
 import java.io.IOException;
@@ -55,14 +56,20 @@ public abstract class Store implements IStore{
                 int endName = command.lastIndexOf("'");
                 String itemName = command.substring(startName + 1 , endName - 1);
                 String restOfString = command.substring(endName + 1);
+                String[] arrOfStr = str.split(" ");
+                int cost = Integer.parseInt(arrOfStr[0]);
+                int quantity = Integer.parseInt(arrOfStr[1]);
+                //Document only gives cost and quantity as part of this command, no aisle number
+                Random rand;
+                int number = rand.nextInt(21) + 1
                 //
-                String inventoryString = itemName + " " + restOfString;
-                inventoryList.add(inventoryString);
-                String outputString = itemName + " was added to iventory";
-                FileUtils.writeLineToOutputFile(outputString);
+                inventoryList.add(new Item(itemName, cost, quantity, number));
+                String outputLine = itemName + " has been addde to inventory";
+                FileUtils.writeLineToOutputFile(outputLine);
             }
             else if (command.substring(0,2) == "SAW"){}
-            else if (command.substring(0,3) == "COST"){}
+            else if (command.substring(0,3) == "COST"){
+            }
             else if (command.substring(0,3) == "EXIT"){}
             else if (command.substring(0,3) == "FIND"){}
             else if (command.substring(0,3) == "FIRE"){}
