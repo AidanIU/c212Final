@@ -60,17 +60,28 @@ public class StoreMap extends JComponent {
 
         // TODO: draw the box appropriately around the aisle. You'll need to define these boundaries yourself for each one!
         g.setColor(Color.GREEN);
-        int i = aisleNum-1;
-        if(i <= 8){
+        int i = aisleNum - 1;
+        if (i < 8) {
             g.drawRect(30, 30 + 60 * i, aisleWidth, aisleHeight);
-            g.drawRect(30-1, (30 + 60 * i)-1, aisleWidth+2, aisleHeight+2);
-            g.drawRect(30-2, (30 + 60 * i)-2, aisleWidth+4, aisleHeight+4);
-        } else{
-            g.drawRect(450, (30 + 60 * (i-4)) , aisleWidth, aisleHeight);
-            g.drawRect(450-1, (30 + 60 * (i-4))-1 , aisleWidth+2, aisleHeight+2);
-            g.drawRect(450-2, (30 + 60 * (i-4))-2 , aisleWidth+4, aisleHeight+4);
+            g.drawRect(30 - 1, (30 + 60 * i) - 1, aisleWidth + 2, aisleHeight + 2);
+            g.drawRect(30 - 2, (30 + 60 * i) - 2, aisleWidth + 4, aisleHeight + 4);
+        } else if (i < 12 && i >= 8) {
+            g.drawRect(450, (30 + 60 * (i - 4)), aisleWidth, aisleHeight);
+            g.drawRect(450 - 1, (30 + 60 * (i - 4)) - 1, aisleWidth + 2, aisleHeight + 2);
+            g.drawRect(450 - 2, (30 + 60 * (i - 4)) - 2, aisleWidth + 4, aisleHeight + 4);
+        } else if (i < 15 && i >= 12) {
+            g.drawRect(490 + 60 * (i - 12), 30 + 60 * 0, 40, 40);
+            g.drawRect((490 + 60 * (i - 12) - 1), ((30 + 60 * 0)-1) , 40 + 2, 40 + 2);
+            g.drawRect((490 + 60 * (i - 12) - 2), ((30 + 60 * 0)-2), 40 + 4, 40 + 4);
+        } else if (i < 18 && i >= 15) {
+            g.drawRect(490 + 60 * (i - 15), 30 + 60 * 1, 40, 40);
+            g.drawRect((490 + 60 * (i - 15) - 1), ((30 + 60 * 1)-1), 40 + 2, 40 + 2);
+            g.drawRect((490 + 60 * (i - 15) - 2), ((30 + 60 * 1)-2), 40 + 4, 40 + 4);
+        }else if (i < 21 && i >= 18) {
+            g.drawRect(490 + 60 * (i - 18), 30 + 60 * 2, 40, 40);
+            g.drawRect((490 + 60 * (i - 18) - 1), ((30 + 60 * 2)-1), 40 + 2, 40 + 2);
+            g.drawRect((490 + 60 * (i - 18) - 2), ((30 + 60 * 2)-2), 40 + 4, 40 + 4);
         }
-
     }
 }
 
