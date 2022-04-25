@@ -7,13 +7,15 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class StaffScheduler {
-    private ArrayList<String[]>  namesAvaliability = new ArrayList<>();
+    private ArrayList<String[]>  namesAvailability = new ArrayList<>();
     private ArrayList<Integer> storeHours = new ArrayList<>();
     private ArrayList<String> schedule = new ArrayList<>();
+    private int totalTime = 0;
 
     public StaffScheduler() throws FileNotFoundException {
         updateNamesAvailability();
         updateStoreHours();
+        sortWorkPeople();
     }
 
     private void updateNamesAvailability() throws FileNotFoundException {
@@ -24,7 +26,7 @@ public class StaffScheduler {
             String temp = in.nextLine();
             String[] info = {temp.substring(0, temp.indexOf(" ", 2)),
                     temp.substring(temp.indexOf(" ", 4) + 1)};
-            namesAvaliability.add(info);
+            namesAvailability.add(info);
         }
     }
 
@@ -37,13 +39,22 @@ public class StaffScheduler {
             int open = Integer.parseInt(temp.substring(temp.indexOf(" ", 1)+1,temp.indexOf(" ", 2)));
             int close = Integer.parseInt(temp.substring(temp.indexOf(" ", 2)+1));
             int time = (close - open)*60;
+            this.totalTime += time;
+            storeHours.add(time);
         }
     }
 
-
-
-
-
+    private void sortWorkPeople(){
+        for (int i = 1; i < this.namesAvailability.size(); i++){
+            int index = i;
+            while((this.namesAvailability.get(i)[1].chars().filter(ch -> ch == '.').count()
+            <this.namesAvailability.get(i-1)[1].chars().filter(ch -> ch == '.').count())&& (index>0)){
+                String[] temp = this.namesAvailability.get(i);
+                this.namesAvailability.set(i,this.namesAvailability.get(i));
+                this.namesAvailability.set(i-1,temp);
+            }
+        }
+    }
 
 
 
@@ -60,8 +71,14 @@ public class StaffScheduler {
 //        out.close();
 
     public void scheduleStaff(){
+        String[] weekdays = {"M","T","W","TR","F","SAT","SUN"};
+        int count = 0;
 
-
+        for (int i = 0; i < 7; i++){
+            for (int x = 0; x < namesAvailability.size(); x++){
+                if ()
+            }
+        }
 
         PrintWriter out = new PrintWriter("C:\\Users\\peter\\IdeaProjects\\c212Final\\src\\resources\\store_schedule_OUT.txt");
     }
