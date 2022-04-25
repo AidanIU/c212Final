@@ -49,7 +49,18 @@ public abstract class Store implements IStore{
 
 
         for (String command: inputList){
-            if (command.substring(0,2) == "ADD"){}
+            if (command.substring(0,2) == "ADD"){
+                //
+                int startName = command.indexOf("'");
+                int endName = command.lastIndexOf("'");
+                String itemName = command.substring(startName + 1 , endName - 1);
+                String restOfString = command.substring(endName + 1);
+                //
+                String inventoryString = itemName + " " + restOfString;
+                inventoryList.add(inventoryString);
+                String outputString = itemName + " was added to iventory";
+                FileUtils.writeLineToOutputFile(outputString);
+            }
             else if (command.substring(0,2) == "SAW"){}
             else if (command.substring(0,3) == "COST"){}
             else if (command.substring(0,3) == "EXIT"){}
