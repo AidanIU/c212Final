@@ -56,7 +56,7 @@ public abstract class Store implements IStore{
                 int endName = command.lastIndexOf("'");
                 String itemName = command.substring(startName + 1 , endName - 1);
                 String restOfString = command.substring(endName + 1);
-                String[] arrOfStr = str.split(" ");
+                String[] arrOfStr = restOfString.split(" ");
                 int cost = Integer.parseInt(arrOfStr[0]);
                 int quantity = Integer.parseInt(arrOfStr[1]);
                 //Document only gives cost and quantity as part of this command, no aisle number
@@ -71,13 +71,27 @@ public abstract class Store implements IStore{
             else if (command.substring(0,3) == "COST"){
             }
             else if (command.substring(0,3) == "EXIT"){}
-            else if (command.substring(0,3) == "FIND"){}
+            else if (command.substring(0,3) == "FIND"){
+
+            }
             else if (command.substring(0,3) == "FIRE"){}
             else if (command.substring(0,3) == "HIRE"){}
             else if (command.substring(0,3) == "SELL"){}
             else if (command.substring(0,7) == "PROMOTE"){}
             else if (command.substring(0,8) == "SCHEDULE"){}
-            else if (command.substring(0,8) == "QUANTITY"){}
+            else if (command.substring(0,8) == "QUANTITY"){
+                int startName = command.indexOf("'");
+                int endName = command.lastIndexOf("'");
+                String itemName = command.substring(startName + 1 , endName - 1);
+
+                for (Item QuantityOfR: inventoryList) {
+                    if(QuantityOfR.getName() == itemName){
+                        FileUtils.writeLineToOutputFile(String.valueOf(QuantityOfR.getQuantity()));
+
+                    }
+                }
+
+            }
         }
 
 
