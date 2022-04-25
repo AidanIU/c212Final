@@ -62,6 +62,20 @@ public abstract class Store implements IStore{
             else if (command.substring(0,8) == "QUANTITY"){}
         }
 
+
+        try {
+            FileUtils.writeInventoryToFile(inventoryList);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            FileUtils.writeStaffToFile(staffList);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
     }
 
     public Store(){
