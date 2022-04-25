@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 
 public abstract class Store implements IStore{
@@ -82,7 +83,12 @@ public abstract class Store implements IStore{
                 String printingPrice = valueOf(price);
                 FileUtils.writeLineToOutputFile(itemName + ": $" + printingPrice);
             }
-            else if (command.substring(0,3) == "EXIT"){}
+            else if (command.substring(0,3) == "EXIT"){
+                Scanner enterButton = new Scanner(System.in);
+                FileUtils.writeLineToOutputFile("Thank you for visiting High's Hardware and Gardening!");
+                System.out.println("Press enter to continue...");
+                String wait = enterButton.nextLine();
+            }
             else if (command.substring(0,3) == "FIND"){
 
             }
