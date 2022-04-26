@@ -125,12 +125,55 @@ public abstract class Store implements IStore{
                 System.out.println("Press enter to continue...");
                 String wait = enterButton.nextLine();
             }
-            else if (command.substring(0,4).equals("FIND")){
+            else if (command.substring(0,4).equals("FIND")) {
 
-            }
+            int startName = command.indexOf("'");
+            int endName = command.lastIndexOf("'");
+            String itemName = command.substring(startName + 1 , endName - 1);
+            String restOfString = command.substring(endName + 1);
+            String[] arrOfStr = restOfString.split(" ");
+            int cost = Integer.parseInt(arrOfStr[0]);
+            int quantity = Integer.parseInt(arrOfStr[1]);
+            int aisle = Integer.parseInt(arrOfStr[2]);
+
+            //StoreMapDisplay.display();
+
+
+
+}
+
+
             else if (command.substring(0,4).equals("FIRE")){}
             else if (command.substring(0,4).equals("HIRE")){}
-            else if (command.substring(0,4).equals("SELL")){}
+
+
+            else if (command.substring(0,4).equals("SELL")) {
+                int startName = command.indexOf("'");
+                int endName = command.lastIndexOf("'");
+                String restOfString = command.substring(endName + 1);
+                String[] arrOfStr = restOfString.split(" ");
+                String itemName = command.substring(startName + 1, endName - 1);
+                int cost = Integer.parseInt(arrOfStr[0]);
+                int quantity = Integer.parseInt(arrOfStr[1]);
+                int aisle = Integer.parseInt(arrOfStr[2]);
+
+                for (Item QuantityOfS : inventoryList) {
+                    if (QuantityOfS.getName().equals(itemName) && QuantityOfS.getQuantity() > quantity) {
+                        try {
+                        FileUtils.writeLineToOutputFile(quantity + itemName + " was sold");
+                    }  catch (IOException e) {
+                            e.printStackTrace();
+                }
+            }
+                    else {
+                        try {
+                        FileUtils.writeLineToOutputFile(itemName + " could not be sold");
+                        }  catch (IOException e) {
+                            e.printStackTrace();
+                    }
+                }
+            }
+        }
             else if (command.substring(0,7).equals("PROMOTE")){
                 //G Gardner
                 //M Manager
