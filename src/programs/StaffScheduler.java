@@ -57,7 +57,6 @@ public class StaffScheduler {
 //        }
 //    }
 
-
     public void scheduleStaff() throws FileNotFoundException {
         String[] weekdays = {"M","T","W","TR","F","SAT","SUN"};
 
@@ -82,6 +81,7 @@ public class StaffScheduler {
         }
 
         PrintWriter out = new PrintWriter("C:\\Users\\peter\\IdeaProjects\\c212Final\\src\\resources\\store_schedule_OUT.txt");
+        out.println();
         for (int i = 0; i < 7; i++){
             int count = 0;
             out.print(weekdays[i]+ " ");
