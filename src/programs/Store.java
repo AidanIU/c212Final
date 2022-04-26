@@ -117,6 +117,23 @@ public abstract class Store implements IStore{
                 //G Gardner
                 //M Manager
                 //C Cashier
+                //Jason Henderson 35 M T.TR.SAT.SUN
+                int startName = command.indexOf("'");
+                int endName = command.lastIndexOf("'");
+                String staffName = command.substring(startName + 1 , endName - 1);
+                String role = command.substring(-1);
+                if (role.equals("G")){role = "Gardner"};
+                if (role.equals("M")){role = "Manager"};
+                if (role.equals("C")){role = "Cashier"};
+                for (Staff staffMember: staffList) {
+                    if (staffMember.getName().equals(staffName)){
+                        staffList.remove(staff);
+                        staffList.add(new Staff(staffMember.getName(), staffMember.getAge(), role, staffMember.getAvailability()));
+                        //<staffName> was promoted to <role>
+                        String outputLine = staffMember.getName() + " was promoted to " + role;
+                        FileUtils.writeLineToOutputFile(outputLine);
+                    }
+                }
             }
             else if (command.substring(0,8) == "SCHEDULE"){}
             else if (command.substring(0,8) == "QUANTITY"){
