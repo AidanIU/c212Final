@@ -3,7 +3,7 @@ import java.util.*;
 
 public class SawPrimePlanks{
 
-    public List<Integer> getPlankLengths(int longPlankLength){
+    public static List<Integer> getPlankLengths(int longPlankLength){
         List<Integer> plankList = new ArrayList<Integer>();
         int biggestPlank = sawPlank(longPlankLength);
         int numberOfPlanks = longPlankLength / biggestPlank;
