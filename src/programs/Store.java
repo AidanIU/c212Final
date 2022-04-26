@@ -113,7 +113,11 @@ public abstract class Store implements IStore{
             else if (command.substring(0,3) == "FIRE"){}
             else if (command.substring(0,3) == "HIRE"){}
             else if (command.substring(0,3) == "SELL"){}
-            else if (command.substring(0,7) == "PROMOTE"){}
+            else if (command.substring(0,7) == "PROMOTE"){
+                //G Gardner
+                //M Manager
+                //C Cashier
+            }
             else if (command.substring(0,8) == "SCHEDULE"){}
             else if (command.substring(0,8) == "QUANTITY"){
                 int startName = command.indexOf("'");
