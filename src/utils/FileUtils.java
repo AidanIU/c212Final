@@ -7,24 +7,26 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
 public class FileUtils {
-    private static File inputFile = new File("../resources/input.txt");
-    private static File outputFile = new File("../resources/output.txt");
-    private static File inventoryFile = new File("../resources/inventory.txt");
-    private static File staffFile = new File("../resources/staff_availability_IN.txt");
-    private static File shiftSchedulesFile = new File("../resources/shift_schedules_IN.txt");
-    private static File storeScheduleFile = new File("../resources/store_schedule_OUT.txt");
+    private static File inputFile = new File("src/resources/input.txt");
+    private static File outputFile = new File("src/resources/output.txt");
+    private static File inventoryFile = new File("src/resources/inventory.txt");
+    private static File staffFile = new File("src/resources/staff_availability_IN.txt");
+    private static File shiftSchedulesFile = new File("src/resources/shift_schedules_IN.txt");
+    private static File storeScheduleFile = new File("src/resources/store_schedule_OUT.txt");
 
     public static List<Item> readInventoryFromFile() throws IOException {
         Scanner s = new Scanner(inventoryFile);
         List<Item> list = new ArrayList<Item>();
-        while (s.hasNext()){
-            String itemList = s.next();
-            String[] arrOfStr = itemList.split(" ");
+        while (s.hasNextLine()){
+            String itemList = s.nextLine();
+            String[] arrOfStr = itemList.split(",");
             String name = arrOfStr[0];
+            name = name.replace("'","");
             Double price = Double.parseDouble(arrOfStr[1]);
             int quantity = Integer.parseInt(arrOfStr[2]);
             int aisleNum = Integer.parseInt(arrOfStr[3]);
@@ -38,13 +40,14 @@ public class FileUtils {
         //Staff file will be in format firstname lastname age role
         Scanner s = new Scanner(staffFile);
         List<Staff> list = new ArrayList<Staff>();
-        while (s.hasNext()){
-            String staffList = s.next();
+        while (s.hasNextLine()){
+            String staffList = s.nextLine();
             String[] arrOfStr = staffList.split(" ");
             String name = arrOfStr[0] + " " + arrOfStr[1];
             int age = Integer.parseInt(arrOfStr[2]);
             String role = arrOfStr[3];
-            list.add(new Staff(name, age, role));
+            String aval = arrOfStr[4];
+            list.add(new Staff(name, age, role, aval));
         }
         s.close();
         return list;
@@ -69,8 +72,8 @@ public class FileUtils {
     public static List<String> readCommandsFromFile() throws IOException {
         Scanner s = new Scanner(inputFile);
         ArrayList<String> list = new ArrayList<String>();
-        while (s.hasNext()){
-            list.add(s.next());
+        while (s.hasNextLine()){
+            list.add(s.nextLine());
         }
         s.close();
         return list;
