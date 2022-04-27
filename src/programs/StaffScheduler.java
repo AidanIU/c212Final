@@ -15,7 +15,7 @@ public class StaffScheduler {
 
         peopleInfo = readStaffFromFile();
 
-        PrintWriter out = new PrintWriter("src/resources/store_schedule_OUT2.txt");
+        PrintWriter out = new PrintWriter("src/resources/store_schedule_OUT.txt");
 
         for (int i = 0; i < 7; i++) {
             int count = 0;
