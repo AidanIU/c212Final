@@ -135,8 +135,25 @@ public abstract class Store implements IStore{
             int cost = Integer.parseInt(arrOfStr[0]);
             int quantity = Integer.parseInt(arrOfStr[1]);
             int aisle = Integer.parseInt(arrOfStr[2]);
+            for(Item items: inventoryList) {
+                for (int i = 0; i<inventoryList.size(); i++) {
+                    if(itemName.equals(items)){
+                    StoreMapDisplay.display(items);
+                    try {
+                        FileUtils.writeLineToOutputFile("Performing store lookup for " + itemName);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                    }
+                } else {
+                    try {
+                        FileUtils.writeLineToOutputFile("ERROR: " + itemName + " cannot be found");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
 
-            //StoreMapDisplay.display();
 
 
 
@@ -167,7 +184,7 @@ public abstract class Store implements IStore{
             }
                     else {
                         try {
-                        FileUtils.writeLineToOutputFile(itemName + " could not be sold");
+                        FileUtils.writeLineToOutputFile("ERROR: " + itemName + " could not be sold");
                         }  catch (IOException e) {
                             e.printStackTrace();
                     }
