@@ -16,7 +16,7 @@ import static java.lang.String.valueOf;
 
 public abstract class Store implements IStore{
 
-    public void takeAction() {
+    public void takeAction() throws IOException {
         //ADD '<itemName>' <itemCost> <itemQuantity>
         //SAW
         //COST '<itemName>'
@@ -174,8 +174,9 @@ public abstract class Store implements IStore{
 
 }
 
-
+//Peter
             else if (command.substring(0,4).equals("FIRE")){}
+            //Peter
             else if (command.substring(0,4).equals("HIRE")){}
 
 
@@ -238,7 +239,11 @@ public abstract class Store implements IStore{
                     staffList.add(new Staff(staffRemove.getName(), staffRemove.getAge(), role.substring(0,1), staffRemove.getAvailability()));
                 }
             }
-            else if (command.substring(0,8).equals("SCHEDULE")){}
+            else if (command.substring(0,8).equals("SCHEDULE")) {
+                StaffScheduler create = new StaffScheduler();
+                create.scheduleStaff();
+                System.out.println("Schedule created");
+            }
             else if (command.substring(0,8).equals("QUANTITY")){
                 int startName = command.indexOf("'");
                 int endName = command.lastIndexOf("'");

@@ -10,29 +10,31 @@ import static utils.FileUtils.readStaffFromFile;
 public class StaffScheduler {
     private List<Staff> peopleInfo;
 
-    public void scheduleStaff() throws IOException {
+    public void scheduleStaff() {
         String[] weekdays = {"M", "T", "W", "TR", "F", "SAT", "SUN"};
+        try {
+            peopleInfo = readStaffFromFile();
+            PrintWriter out = new PrintWriter("src/resources/store_schedule_OUT.txt");
 
-        peopleInfo = readStaffFromFile();
-
-        PrintWriter out = new PrintWriter("src/resources/store_schedule_OUT.txt");
-
-        for (int i = 0; i < 7; i++) {
-            int count = 0;
-            out.print(weekdays[i] + " ");
-            for (int x = 0; x < this.peopleInfo.size(); x++) {
-                String aval = peopleInfo.get(x).getAvailability();
-                if ((aval.contains("." + weekdays[i]) || aval.contains(weekdays[i] + ".")) && count != 3) {
-                    out.print("(" + peopleInfo.get(x).getName() + ") ");
-                    Staff a = peopleInfo.get(x);
-                    peopleInfo.remove(x);
-                    peopleInfo.add(a);
-                    count++;
+            for (int i = 0; i < 7; i++) {
+                int count = 0;
+                out.print(weekdays[i] + " ");
+                for (int x = 0; x < this.peopleInfo.size(); x++) {
+                    String aval = peopleInfo.get(x).getAvailability();
+                    if ((aval.contains("." + weekdays[i]) || aval.contains(weekdays[i] + ".")) && count != 3) {
+                        out.print("(" + peopleInfo.get(x).getName() + ") ");
+                        Staff a = peopleInfo.get(x);
+                        peopleInfo.remove(x);
+                        peopleInfo.add(a);
+                        count++;
+                    }
                 }
+                out.print("\n");
             }
-            out.print("\n");
+            out.close();
+        }catch(IOException e){
+            e.printStackTrace();
         }
-        out.close();
     }
 }
 
