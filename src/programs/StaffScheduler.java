@@ -1,14 +1,9 @@
 package programs;
 
 import models.Staff;
-
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 import static utils.FileUtils.readStaffFromFile;
 
@@ -26,13 +21,16 @@ public class StaffScheduler {
             int count = 0;
             out.print(weekdays[i] + " ");
             for (int x = 0; x < this.peopleInfo.size(); x++) {
-                out.print(weekdays[i] + " ");
                 String aval = peopleInfo.get(x).getAvailability();
-                if (aval.contains("." + weekdays[i]) || aval.contains(weekdays[i] + ".")) {
-                    out.print("(" + peopleInfo + ") ");
+                if ((aval.contains("." + weekdays[i]) || aval.contains(weekdays[i] + ".")) && count != 3) {
+                    out.print("(" + peopleInfo.get(x).getName() + ") ");
+                    Staff a = peopleInfo.get(x);
+                    peopleInfo.remove(x);
+                    peopleInfo.add(a);
+                    count++;
                 }
-                System.out.println();
             }
+            out.print("\n");
         }
         out.close();
     }

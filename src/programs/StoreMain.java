@@ -3,10 +3,13 @@ package programs;
 import models.Item;
 import models.Staff;
 
+import java.io.IOException;
 import java.util.List;
 
 public class StoreMain{
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+        StaffScheduler a = new StaffScheduler();
+        a.scheduleStaff();
         Store highsHardware = new Store() {
             @Override
             public List<Item> getItemsFromFile() {
