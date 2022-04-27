@@ -61,8 +61,8 @@ public abstract class Store implements IStore{
                 //
                 int startName = command.indexOf("'");
                 int endName = command.lastIndexOf("'");
-                String itemName = command.substring(startName + 1 , endName - 1);
-                String restOfString = command.substring(endName + 1);
+                String itemName = command.substring(startName + 1 , endName);
+                String restOfString = command.substring(endName + 2);
                 String[] arrOfStr = restOfString.split(" ");
                 int cost = Integer.parseInt(arrOfStr[0]);
                 int quantity = Integer.parseInt(arrOfStr[1]);
@@ -77,23 +77,34 @@ public abstract class Store implements IStore{
                 }
             }
             else if (command.substring(0,3).equals("SAW")){
+                boolean toRemove = false;
+                Item removingItem = null;
+                String newName = null;
+                int newPrice = 0;
+                int totalPlanks = 0;
+                int aisle = 0;
                 ArrayList<Item> bigPlanks = new ArrayList<Item>();
                 for (Item item: inventoryList) {
                     String name = item.getName();
+                    if (name.length() < 5) {continue;}
                     if (name.substring(0,5).equals("Plank")){
-                        inventoryList.remove(item);
+                        removingItem = item;
+                        toRemove = true;
                         String[] arrOfStr = name.split(" ");
                         String[] arrOfStr2 = arrOfStr[0].split("-");
                         int length = Integer.parseInt(arrOfStr2[1]);
-                        int quantity = Integer.parseInt(arrOfStr[2]);
-                        int aisle = Integer.parseInt(arrOfStr[3]);
+                        int quantity = item.getQuantity();
+                        aisle = item.getAisle();
                         List<Integer> newPlanks = SawPrimePlanks.getPlankLengths(length);
                         int newLength = newPlanks.get(0);
-                        int totalPlanks = newPlanks.size() * quantity;
-                        int newPrice = newLength * newLength;
-                        String newName = "Plank-" + Integer.toString(newLength);
-                        inventoryList.add(new Item(newName, newPrice, totalPlanks, aisle));
+                        totalPlanks = newPlanks.size() * quantity;
+                        newPrice = newLength * newLength;
+                        newName = "Plank-" + Integer.toString(newLength);
                     }
+                }
+                if (toRemove) {
+                    inventoryList.remove(removingItem);
+                    inventoryList.add(new Item(newName, newPrice, totalPlanks, aisle));
                 }
                 try {
                     FileUtils.writeLineToOutputFile("Planks Sawed");
@@ -104,7 +115,7 @@ public abstract class Store implements IStore{
             else if (command.substring(0,4).equals("COST")){
                 int startName = command.indexOf("'");
                 int endName = command.lastIndexOf("'");
-                String itemName = command.substring(startName + 1 , endName - 1);
+                String itemName = command.substring(startName + 1 , endName);
                 int price = 0;
 
                 for (Item itemFromList: inventoryList) {
@@ -202,15 +213,17 @@ public abstract class Store implements IStore{
                 //Jason Henderson 35 M T.TR.SAT.SUN
                 int startName = command.indexOf("'");
                 int endName = command.lastIndexOf("'");
-                String staffName = command.substring(startName + 1 , endName - 1);
+                String staffName = command.substring(startName + 1 , endName);
                 String role = command.substring(command.length()-1);
                 if (role.equals("G")){role = "Gardner";}
                 if (role.equals("M")){role = "Manager";}
                 if (role.equals("C")){role = "Cashier";}
+                boolean remove = false;
+                Staff staffRemove = null;
                 for (Staff staffMember: staffList) {
                     if (staffMember.getName().equals(staffName)){
-                        staffList.remove(staffMember);
-                        staffList.add(new Staff(staffMember.getName(), staffMember.getAge(), role, staffMember.getAvailability()));
+                        remove = true;
+                        staffRemove = staffMember;
                         //<staffName> was promoted to <role>
                         String outputLine = staffMember.getName() + " was promoted to " + role;
                         try {
@@ -219,6 +232,10 @@ public abstract class Store implements IStore{
                             e.printStackTrace();
                         }
                     }
+                }
+                if (remove){
+                    staffList.remove(staffRemove);
+                    staffList.add(new Staff(staffRemove.getName(), staffRemove.getAge(), role.substring(0,1), staffRemove.getAvailability()));
                 }
             }
             else if (command.substring(0,8).equals("SCHEDULE")){}
