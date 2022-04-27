@@ -65,19 +65,19 @@ public class StoreMap extends JComponent {
             g.drawRect(30, 30 + 60 * i, aisleWidth, aisleHeight);
             g.drawRect(30 - 1, (30 + 60 * i) - 1, aisleWidth + 2, aisleHeight + 2);
             g.drawRect(30 - 2, (30 + 60 * i) - 2, aisleWidth + 4, aisleHeight + 4);
-        } else if (i < 12 && i >= 8) {
+        } else if (i < 12) {
             g.drawRect(450, (30 + 60 * (i - 4)), aisleWidth, aisleHeight);
             g.drawRect(450 - 1, (30 + 60 * (i - 4)) - 1, aisleWidth + 2, aisleHeight + 2);
             g.drawRect(450 - 2, (30 + 60 * (i - 4)) - 2, aisleWidth + 4, aisleHeight + 4);
-        } else if (i < 15 && i >= 12) {
-            g.drawRect(490 + 60 * (i - 12), 30 + 60 * 0, 40, 40);
-            g.drawRect((490 + 60 * (i - 12) - 1), ((30 + 60 * 0)-1) , 40 + 2, 40 + 2);
-            g.drawRect((490 + 60 * (i - 12) - 2), ((30 + 60 * 0)-2), 40 + 4, 40 + 4);
-        } else if (i < 18 && i >= 15) {
-            g.drawRect(490 + 60 * (i - 15), 30 + 60 * 1, 40, 40);
-            g.drawRect((490 + 60 * (i - 15) - 1), ((30 + 60 * 1)-1), 40 + 2, 40 + 2);
-            g.drawRect((490 + 60 * (i - 15) - 2), ((30 + 60 * 1)-2), 40 + 4, 40 + 4);
-        }else if (i < 21 && i >= 18) {
+        } else if (i < 15) {
+            g.drawRect(490 + 60 * (i - 12), 30, 40, 40);
+            g.drawRect((490 + 60 * (i - 12) - 1), ((30)-1) , 40 + 2, 40 + 2);
+            g.drawRect((490 + 60 * (i - 12) - 2), ((30)-2), 40 + 4, 40 + 4);
+        } else if (i < 18) {
+            g.drawRect(490 + 60 * (i - 15), 30 + 60, 40, 40);
+            g.drawRect((490 + 60 * (i - 15) - 1), ((30 + 60)-1), 40 + 2, 40 + 2);
+            g.drawRect((490 + 60 * (i - 15) - 2), ((30 + 60)-2), 40 + 4, 40 + 4);
+        }else if (i < 21) {
             g.drawRect(490 + 60 * (i - 18), 30 + 60 * 2, 40, 40);
             g.drawRect((490 + 60 * (i - 18) - 1), ((30 + 60 * 2)-1), 40 + 2, 40 + 2);
             g.drawRect((490 + 60 * (i - 18) - 2), ((30 + 60 * 2)-2), 40 + 4, 40 + 4);
