@@ -53,6 +53,10 @@ public abstract class Store implements IStore{
 
 
         for (String command: inputList){
+            if (command.equals("") || command.equals(" ") || command.equals("\n")){
+                System.out.println("No Commands!!");
+                break;
+            }
             if (command.substring(0,3).equals("ADD")){
                 //
                 int startName = command.indexOf("'");

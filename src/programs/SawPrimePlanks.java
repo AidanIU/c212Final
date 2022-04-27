@@ -14,7 +14,7 @@ public class SawPrimePlanks{
         return plankList;
     }
 
-    public int sawPlank(int plankLength){
+    public static int sawPlank(int plankLength){
         int cut = 0;
         boolean isPrime = true;
         for (int i = 2; i <= plankLength / 2; ++i) {

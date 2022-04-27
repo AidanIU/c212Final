@@ -56,7 +56,7 @@ public class FileUtils {
     public static void writeInventoryToFile(List<Item> items) throws IOException {
         FileWriter writer = new FileWriter(inventoryFile);
         for(Item anItem: items) {
-            writer.write(anItem.getName() + " " + anItem.getPrice() + " " + anItem.getQuantity() + " " + anItem.getAisle());
+            writer.write("'" + anItem.getName() + "'," + anItem.getPrice() + "," + anItem.getQuantity() + "," + anItem.getAisle() + "\n");
         }
         writer.close();
     }
@@ -64,7 +64,7 @@ public class FileUtils {
     public static void writeStaffToFile(List<Staff> employees) throws IOException {
         FileWriter writer = new FileWriter(staffFile);
         for(Staff staffMember: employees) {
-            writer.write(staffMember.getName() + " " + staffMember.getAge() + " " + staffMember.getRole());
+            writer.write(staffMember.getName() + " " + staffMember.getAge() + " " + staffMember.getRole() + " " + staffMember.getAvailability() + "\n");
         }
         writer.close();
     }
