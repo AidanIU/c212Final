@@ -267,7 +267,6 @@ public abstract class Store implements IStore{
 
 
     }
-
     public Store(){
         try {
             takeAction();
