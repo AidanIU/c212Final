@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import static java.lang.String.valueOf;
+import static utils.FileUtils.writeStaffToFile;
 
 
 public abstract class Store implements IStore{
@@ -164,7 +165,7 @@ public abstract class Store implements IStore{
                 }
             }
 
-//Peter
+
             else if (command.substring(0,4).equals("FIRE")){
                 int length = staffList.size();
                 String fire = command.substring(command.indexOf("'")+1,command.lastIndexOf("'"));
@@ -299,7 +300,7 @@ public abstract class Store implements IStore{
         }
 
         try {
-            FileUtils.writeStaffToFile(staffList);
+            writeStaffToFile(staffList);
         } catch (IOException e) {
             e.printStackTrace();
         }

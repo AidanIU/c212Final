@@ -10,3 +10,4 @@ Wanda Flores 67 M W.TR.F.SUN
 Peter Heile 18 M M.T.W
 Iman Navaie 19 C M.TR
 Aiden Moran 19 C M.T.W.F
+Sid Anil 19 M M.T.W.TR.F
