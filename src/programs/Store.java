@@ -268,6 +268,10 @@ public abstract class Store implements IStore{
     }
 
     public Store(){
-        takeAction();
+        try {
+            takeAction();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
