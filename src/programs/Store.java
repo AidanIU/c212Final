@@ -171,6 +171,7 @@ public abstract class Store implements IStore{
 
 
             else if (command.substring(0,4).equals("SELL")) {
+
                 int startName = command.indexOf("'");
                 int endName = command.lastIndexOf("'");
                 String itemName = command.substring(startName + 1 , endName);
