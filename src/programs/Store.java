@@ -3,6 +3,8 @@ package programs;
 import models.Item;
 import models.Staff;
 import utils.FileUtils;
+
+import java.io.PrintWriter;
 import java.util.Random;
 
 import java.io.File;
@@ -12,6 +14,8 @@ import java.util.List;
 import java.util.Scanner;
 
 import static java.lang.String.valueOf;
+import static utils.FileUtils.readStaffFromFile;
+import static utils.FileUtils.writeStaffToFile;
 
 
 public abstract class Store implements IStore{
@@ -174,10 +178,30 @@ public abstract class Store implements IStore{
 
 }
 
-//Peter
-            else if (command.substring(0,4).equals("FIRE")){}
-            //Peter
-            else if (command.substring(0,4).equals("HIRE")){}
+
+            else if (command.substring(0,4).equals("FIRE")){
+                List<Staff> staff = readStaffFromFile();
+                int length = staff.size();
+                String fire = command.substring(command.indexOf("'"),command.indexOf("'",2));
+                for (int i = 0; i < staff.size(); i++){
+                    if (fire.equals(staff.get(i).getName())){
+                        System.out.println(staff.get(i).getName() + " was Fired.");
+                        staff.remove(i);
+                        break;
+                    }
+                }
+                if (length>staff.size()){
+                    System.out.println(fire + " cannot be found.");
+                }
+
+            }
+            else if (command.substring(0,4).equals("HIRE")){
+                command = command.substring(4);
+                List<Staff> staff = readStaffFromFile();
+                String[] info = command.split(",");
+                staff.add(new Staff(info[0],Integer.valueOf(info[1]),info[2],info[3]));
+                writeStaffToFile(staff);
+            }
 
 
             else if (command.substring(0,4).equals("SELL")) {
@@ -271,7 +295,7 @@ public abstract class Store implements IStore{
         }
 
         try {
-            FileUtils.writeStaffToFile(staffList);
+            writeStaffToFile(staffList);
         } catch (IOException e) {
             e.printStackTrace();
         }
