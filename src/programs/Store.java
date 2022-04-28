@@ -165,11 +165,46 @@ public abstract class Store implements IStore{
             }
 
 //Peter
-            else if (command.substring(0,4).equals("FIRE")){}
-            //Peter
-            else if (command.substring(0,4).equals("HIRE")){}
-
-
+            else if (command.substring(0,4).equals("FIRE")){
+                int length = staffList.size();
+                String fire = command.substring(command.indexOf("'")+1,command.lastIndexOf("'"));
+                for (int i = 0; i < staffList.size(); i++){
+                    if (fire.equals(staffList.get(i).getName())){
+                        try {
+                            FileUtils.writeLineToOutputFile(staffList.get(i).getName() + " was fired.");
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        staffList.remove(i);
+                        break;
+                    }
+                    writeStaffToFile(staffList);
+                }
+                if (length==staffList.size()){
+                    try {
+                        FileUtils.writeLineToOutputFile(fire + " cannot be found.");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+            else if (command.substring(0,4).equals("HIRE")){
+                String[] roles = {"Manager","Cashier"};
+                String hire = command.substring(command.indexOf("'")+1,command.lastIndexOf("'"));
+                String[] info = command.substring(4).split(" ");
+                staffList.add(new Staff(hire,Integer.valueOf(info[3]),info[4],info[5]));
+                writeStaffToFile(staffList);
+                try {
+                    if (info[4].equals("M"))
+                        FileUtils.writeLineToOutputFile(hire+ " has been hired as a Manager");
+                    else if (info[4].equals("C"))
+                        FileUtils.writeLineToOutputFile(hire + " has been hired as a Cashier");
+                    else
+                        FileUtils.writeLineToOutputFile(hire + " has been hired as a Gardener");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
             else if (command.substring(0,4).equals("SELL")) {
 
                 int startName = command.indexOf("'");
@@ -231,7 +266,11 @@ public abstract class Store implements IStore{
             else if (command.substring(0,8).equals("SCHEDULE")) {
                 StaffScheduler create = new StaffScheduler();
                 create.scheduleStaff();
-                System.out.println("Schedule created");
+                try {
+                    FileUtils.writeLineToOutputFile("Schedule Created");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
             else if (command.substring(0,8).equals("QUANTITY")){
                 int startName = command.indexOf("'");
