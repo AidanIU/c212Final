@@ -180,27 +180,44 @@ public abstract class Store implements IStore{
 
 
             else if (command.substring(0,4).equals("FIRE")){
-                List<Staff> staff = readStaffFromFile();
-                int length = staff.size();
-                String fire = command.substring(command.indexOf("'"),command.indexOf("'",2));
-                for (int i = 0; i < staff.size(); i++){
-                    if (fire.equals(staff.get(i).getName())){
-                        System.out.println(staff.get(i).getName() + " was Fired.");
-                        staff.remove(i);
+                int length = staffList.size();
+                String fire = command.substring(command.indexOf("'")+1,command.lastIndexOf("'"));
+                for (int i = 0; i < staffList.size(); i++){
+                    if (fire.equals(staffList.get(i).getName())){
+                        try {
+                            FileUtils.writeLineToOutputFile(staffList.get(i).getName() + " was fired.");
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        staffList.remove(i);
                         break;
                     }
+                    writeStaffToFile(staffList);
                 }
-                if (length>staff.size()){
-                    System.out.println(fire + " cannot be found.");
+                if (length==staffList.size()){
+                    try {
+                        FileUtils.writeLineToOutputFile(fire + " cannot be found.");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
-
             }
             else if (command.substring(0,4).equals("HIRE")){
-                command = command.substring(4);
-                List<Staff> staff = readStaffFromFile();
-                String[] info = command.split(",");
-                staff.add(new Staff(info[0],Integer.valueOf(info[1]),info[2],info[3]));
-                writeStaffToFile(staff);
+                String[] roles = {"Manager","Cashier"};
+                String hire = command.substring(command.indexOf("'")+1,command.lastIndexOf("'"));
+                String[] info = command.substring(4).split(" ");
+                staffList.add(new Staff(hire,Integer.valueOf(info[3]),info[4],info[5]));
+                writeStaffToFile(staffList);
+                try {
+                    if (info[4].equals("M"))
+                        FileUtils.writeLineToOutputFile(hire+ " has been hired as a Manager");
+                    else if (info[4].equals("C"))
+                        FileUtils.writeLineToOutputFile(hire + " has been hired as a Cashier");
+                    else
+                        FileUtils.writeLineToOutputFile(hire + " has been hired as a Gardener");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
 
 
@@ -266,7 +283,11 @@ public abstract class Store implements IStore{
             else if (command.substring(0,8).equals("SCHEDULE")) {
                 StaffScheduler create = new StaffScheduler();
                 create.scheduleStaff();
-                System.out.println("Schedule created");
+                try {
+                    FileUtils.writeLineToOutputFile("Schedule Created");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
             else if (command.substring(0,8).equals("QUANTITY")){
                 int startName = command.indexOf("'");
@@ -304,6 +325,10 @@ public abstract class Store implements IStore{
     }
 
     public Store(){
-        takeAction();
+        try {
+            takeAction();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
