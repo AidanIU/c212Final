@@ -142,38 +142,28 @@ public abstract class Store implements IStore{
             }
             else if (command.substring(0,4).equals("FIND")) {
 
-            int startName = command.indexOf("'");
-            int endName = command.lastIndexOf("'");
-            String itemName = command.substring(startName + 1 , endName - 1);
-            String restOfString = command.substring(endName + 1);
-            String[] arrOfStr = restOfString.split(" ");
-            int cost = Integer.parseInt(arrOfStr[0]);
-            int quantity = Integer.parseInt(arrOfStr[1]);
-            int aisle = Integer.parseInt(arrOfStr[2]);
-            for(Item items: inventoryList) {
-                for (int i = 0; i<inventoryList.size(); i++) {
-                    if(itemName.equals(items)){
-                    StoreMapDisplay.display(items);
-                    try {
-                        FileUtils.writeLineToOutputFile("Performing store lookup for " + itemName);
+                int startName = command.indexOf("'");
+                int endName = command.lastIndexOf("'");
+                String itemName = command.substring(startName + 1, endName);
+
+                for (int i = 0; i < inventoryList.size(); i++) {
+                    if (itemName.equals(inventoryList.get(i).getName())) {
+                        StoreMapDisplay.display(inventoryList.get(i));
+                        try {
+                            FileUtils.writeLineToOutputFile("Performing store lookup for " + itemName);
                         } catch (IOException e) {
                             e.printStackTrace();
-                    }
-                } else {
-                    try {
-                        FileUtils.writeLineToOutputFile("ERROR: " + itemName + " cannot be found");
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                        }
+                        break;
+                    } else if (i == inventoryList.size()-1){
+                        try {
+                            FileUtils.writeLineToOutputFile("ERROR: " + itemName + " cannot be found");
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                     }
                 }
             }
-        }
-
-
-
-
-}
-
 //Peter
             else if (command.substring(0,4).equals("FIRE")){}
             //Peter
@@ -183,30 +173,28 @@ public abstract class Store implements IStore{
             else if (command.substring(0,4).equals("SELL")) {
                 int startName = command.indexOf("'");
                 int endName = command.lastIndexOf("'");
-                String restOfString = command.substring(endName + 1);
+                String itemName = command.substring(startName + 1 , endName);
+                String restOfString = command.substring(endName + 2);
                 String[] arrOfStr = restOfString.split(" ");
-                String itemName = command.substring(startName + 1, endName - 1);
-                int cost = Integer.parseInt(arrOfStr[0]);
-                int quantity = Integer.parseInt(arrOfStr[1]);
-                int aisle = Integer.parseInt(arrOfStr[2]);
+                int quantity = Integer.parseInt(arrOfStr[0]);
 
-                for (Item QuantityOfS : inventoryList) {
-                    if (QuantityOfS.getName().equals(itemName) && QuantityOfS.getQuantity() > quantity) {
+                for (int i = 0; i < inventoryList.size(); i++) {
+                    if (itemName.equals(inventoryList.get(i).getName()) &&
+                            inventoryList.get(i).getQuantity() >= quantity){
                         try {
-                        FileUtils.writeLineToOutputFile(quantity + itemName + " was sold");
-                    }  catch (IOException e) {
-                            e.printStackTrace();
-                }
-            }
-                    else {
-                        try {
-                        FileUtils.writeLineToOutputFile("ERROR: " + itemName + " could not be sold");
+                            FileUtils.writeLineToOutputFile(quantity + " " + itemName + " was sold");
                         }  catch (IOException e) {
                             e.printStackTrace();
+                        }
+                    } else if (i == inventoryList.size()-1){
+                        try {
+                            FileUtils.writeLineToOutputFile("ERROR: " + itemName + " could not be sold");
+                        }  catch (IOException e) {
+                            e.printStackTrace();
+                        }
                     }
                 }
             }
-        }
             else if (command.substring(0,7).equals("PROMOTE")){
                 //G Gardner
                 //M Manager
@@ -247,7 +235,7 @@ public abstract class Store implements IStore{
             else if (command.substring(0,8).equals("QUANTITY")){
                 int startName = command.indexOf("'");
                 int endName = command.lastIndexOf("'");
-                String itemName = command.substring(startName + 1 , endName - 1);
+                String itemName = command.substring(startName + 1 , endName);
 
                 for (Item QuantityOfR: inventoryList) {
                     if(QuantityOfR.getName().equals(itemName)){
@@ -262,7 +250,6 @@ public abstract class Store implements IStore{
 
             }
         }
-
 
         try {
             FileUtils.writeInventoryToFile(inventoryList);
