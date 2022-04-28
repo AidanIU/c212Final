@@ -141,38 +141,28 @@ public abstract class Store implements IStore{
                 String wait = enterButton.nextLine();
             }
             else if (command.substring(0,4).equals("FIND")) {
+                int startName = command.indexOf("'");
+                int endName = command.lastIndexOf("'");
+                String itemName = command.substring(startName + 1, endName);
 
-            int startName = command.indexOf("'");
-            int endName = command.lastIndexOf("'");
-            String itemName = command.substring(startName + 1 , endName - 1);
-            String restOfString = command.substring(endName + 1);
-            String[] arrOfStr = restOfString.split(" ");
-            int cost = Integer.parseInt(arrOfStr[0]);
-            int quantity = Integer.parseInt(arrOfStr[1]);
-            int aisle = Integer.parseInt(arrOfStr[2]);
-            for(Item items: inventoryList) {
-                for (int i = 0; i<inventoryList.size(); i++) {
-                    if(itemName.equals(items)){
-                    StoreMapDisplay.display(items);
-                    try {
-                        FileUtils.writeLineToOutputFile("Performing store lookup for " + itemName);
+                for (int i = 0; i < inventoryList.size(); i++) {
+                    if (itemName.equals(inventoryList.get(i).getName())) {
+                        StoreMapDisplay.display(inventoryList.get(i));
+                        try {
+                            FileUtils.writeLineToOutputFile("Performing store lookup for " + itemName);
                         } catch (IOException e) {
                             e.printStackTrace();
-                    }
-                } else {
-                    try {
-                        FileUtils.writeLineToOutputFile("ERROR: " + itemName + " cannot be found");
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                        }
+                        break;
+                    } else if (i == inventoryList.size()-1){
+                        try {
+                            FileUtils.writeLineToOutputFile("ERROR: " + itemName + " cannot be found");
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                     }
                 }
             }
-        }
-
-
-
-
-}
 
 //Peter
             else if (command.substring(0,4).equals("FIRE")){}
