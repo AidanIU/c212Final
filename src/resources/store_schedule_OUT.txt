@@ -1,8 +1,8 @@
-Created 2022/04/28 01:26:54
-M (Catherine Garcia) (Kenneth White) (Anthony Mitchell) 
-T (Amanda Smith) (Carolyn Perry) (Jack Sanchez) 
-W (Lisa Russell) (Peter Heile) (Aiden Moran) 
-TR (Earl Edwards) (Iman Navaie) (Amanda Smith) 
-F (Wanda Flores) (Catherine Garcia) (Anthony Mitchell) 
-SAT (Carolyn Perry) (Earl Edwards) (Catherine Garcia) 
-SUN (Wanda Flores) (Carolyn Perry) (Wanda Flores) 
+Created 2022/04/28 17:58:15
+M (Peter Heile) (Jack Sanchez) (Iman Navaie) 
+T (Amanda Smith) (Earl Edwards) (Lisa Russell) 
+W (Anthony Mitchell) (Wanda Flores) (Braden White) 
+TR (Ashley Ziegler) (Trevor Bidlack) (Amanda Smith) 
+F (Kenneth White) (David Dahodu) (Carolyn Perry) 
+SAT (Catherine Garcia) (Carolyn Perry) (Iman Navaie) 
+SUN (Earl Edwards) (Anthony Mitchell) (Wanda Flores) 

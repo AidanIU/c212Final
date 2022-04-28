@@ -1,3 +1,8 @@
+FIRE 'Aiden Moran'
+FIRE 'Sid Anil'
+HIRE 'Ashley Ziegler' 18 M M.T.W.TR.F
+HIRE 'David Dahodu' 18 C M.T.F.SUN
+HIRE 'Braden White' 18 C T.W.TR.F
+HIRE 'Trevor Bidlack' 18 G TR.F
 SCHEDULE
-
 

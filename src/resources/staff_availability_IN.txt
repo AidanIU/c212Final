@@ -7,7 +7,9 @@ Lisa Russell 46 C T.W.TR.F
 Anthony Mitchell 20 C M.W.F.SUN
 Jack Sanchez 26 G M.T.W
 Wanda Flores 67 M W.TR.F.SUN
-Peter Heile 18 M M.T.W
-Iman Navaie 19 C M.TR
-Aiden Moran 19 C M.T.W.F
-Sid Anil 19 M M.T.W.TR.F
+Peter Heile 18 M M.
+Iman Navaie 19 C M.T.SAT
+Ashley Ziegler 18 M M.T.W.TR.F
+David Dahodu 18 C M.T.F.SUN
+Braden White 18 C T.W.TR.F
+Trevor Bidlack 18 G TR.F
